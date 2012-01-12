@@ -1,0 +1,10 @@
+.DS_Store
+*.pyc
+\.#*
+bin/
+lib/
+include/
+share/
+.Python
+*.egg
+.eyes
