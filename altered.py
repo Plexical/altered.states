@@ -52,7 +52,7 @@ def change(orig, getter, setter, deleter, **attrs):
             setter(orig, key, val)
     return diff
 
-def restore(orig, diff, getter, setter, deleter, **attrs):
+def restore(orig, diff, getter, setter, deleter):
     """
     Takes a diff produced by `change()` and applies it to `orig` to
     make it revert to the state it had before `change()` was called on
@@ -82,4 +82,4 @@ def state(orig, getter=getattr, setter=setattr, deleter=delattr, **attrs):
         getter, setter, deleter = dictget, dictset, dictdel
     diff = change(orig, getter, setter, deleter, **attrs)
     yield orig
-    restore(orig, diff, getter, setter, deleter, **attrs)
+    restore(orig, diff, getter, setter, deleter)
