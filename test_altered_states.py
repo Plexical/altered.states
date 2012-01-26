@@ -1,6 +1,6 @@
 import pytest
 
-from altered import state, forget, Expando
+from altered import state, decostate, forget, Expando
 
 pytest_funcarg__obj = lambda request: Expando(a=1)
 pytest_funcarg__dct = lambda request: {'a':1}
@@ -40,3 +40,9 @@ def test_state_dict_forget(dct):
     with(state(dct, a=forget)):
         assert dct == {}
     assert dct == {'a':1}
+
+a_global = Expando(a=1)
+
+@decostate(a_global, a=2)
+def test_decostate_simple():
+    assert a_global.a == 2

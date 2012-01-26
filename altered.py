@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from functools import wraps
 
 class Expando(object):
     """
@@ -83,3 +84,15 @@ def state(orig, getter=getattr, setter=setattr, deleter=delattr, **attrs):
     diff = change(orig, getter, setter, deleter, **attrs)
     yield orig
     restore(orig, diff, getter, setter, deleter)
+
+def decostate(org, **attrs):
+    """
+    Alter state by decorator. XXX must have a better name/placing for this!
+    """
+    def wrap(fn):
+        @wraps(fn)
+        def altering(*args, **kw):
+            with(state(org, **attrs)):
+                return fn(*args, **kw)
+        return altering
+    return wrap
