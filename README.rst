@@ -12,13 +12,16 @@ procedure that should be relatively simple quite complicated.
 .. _monkey patching: http://en.wikipedia.org/wiki/Monkey_patch
 .. _search: http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch
 
-Altered States tries to keep the API maximally simple:
+Altered States tries to keep the API maximally simple. Either
+manipulate your world via the `with` statement:
 
 >>> from altered import Expando, state
 >>> obj = Expando(a=1)
 >>> with(state(obj, a=2)):
 ...     print obj.a
 2
+
+or using a `decorator`:
 
 >>> import altered
 >>> obj = altered.Expando(a=1)
