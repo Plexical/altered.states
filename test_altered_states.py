@@ -5,6 +5,18 @@ from altered import state, decostate, forget, Expando
 pytest_funcarg__obj = lambda request: Expando(a=1)
 pytest_funcarg__dct = lambda request: {'a':1}
 
+def pytest_funcarg__objtest(request):
+    def o_check(obj, a, b):
+        assert obj.a == a
+        assert obj.b == b
+    return o_check
+
+def pytest_funcarg__dcttest(request):
+    def dct_check(dct, a, b):
+        assert dct['a'] == a
+        assert dct['b'] == b
+    return dct_check
+
 # @state(os.environ, DJANGO_SETTINGS_MODULE='proj.settings')
 # def test_django_case():
 #     # ...
@@ -41,8 +53,20 @@ def test_state_dict_forget(dct):
         assert dct == {}
     assert dct == {'a':1}
 
-a_global = Expando(a=1)
+def test_decorator_obj(obj, objtest):
+    @decostate(obj, a=3, b=4)
+    def check(o):
+        objtest(o, 3, 4)
+    check(obj)
+    assert check.func_name == 'check'
+    assert obj.a == 1
+    assert not hasattr(obj, 'b')
 
-@decostate(a_global, a=2)
-def test_decostate_simple():
-    assert a_global.a == 2
+def test_decorator_dict(dct, dcttest):
+    @decostate(dct, a=5, b=6)
+    def check(d):
+        dcttest(d, 5, 6)
+    check(dct)
+    assert check.func_name == 'check'
+    assert dct['a'] == 1
+    assert 'b' not in dct
