@@ -14,22 +14,22 @@ complicated.
 Altered States tries to keep the API maximally simple. Either
 manipulate your world via the `with` statement:
 
-    ```python
-    >>> from altered import Expando, state
-    >>> obj = Expando(a=1)
-    >>> with(state(obj, a=2)):
-    ...     print obj.a
-    2
-    ```
+```python
+>>> from altered import Expando, state
+>>> obj = Expando(a=1)
+>>> with(state(obj, a=2)):
+...     print obj.a
+2
+```
 
 or using a `decorator`:
 
-    ```python
-    >>> import altered
-    >>> obj = altered.Expando(a=1)
-    >>> @altered.decostate(obj, a=3)
-    >>> def fn():
-    ...     return obj.a
-    >>> fn()
-    3
-    ```
+```python
+>>> import altered
+>>> obj = altered.Expando(a=1)
+>>> @altered.decostate(obj, a=3)
+>>> def fn():
+...     return obj.a
+>>> fn()
+3
+```
