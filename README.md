@@ -1,8 +1,9 @@
 Python monkey-patching for Humans
 ===================================
 
-*Altered States* tries to take @kennethreitz concept of [Python for
-Humans](http://python-for-humans.heroku.com/) and applies it to
+*Altered States* tries to take
+[@kennethreitz](https://github.com/kennethreitz) concept of [Python
+for Humans](http://python-for-humans.heroku.com/) and applies it to
 [monkey patching](http://en.wikipedia.org/wiki/Monkey_patch). A
 [search](http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch)
 on PyPI shows that there are already many often technically
@@ -13,14 +14,17 @@ complicated.
 Altered States tries to keep the API maximally simple. Either
 manipulate your world via the `with` statement:
 
+    ```python
     >>> from altered import Expando, state
     >>> obj = Expando(a=1)
     >>> with(state(obj, a=2)):
     ...     print obj.a
     2
+    ```
 
 or using a `decorator`:
 
+    ```python
     >>> import altered
     >>> obj = altered.Expando(a=1)
     >>> @altered.decostate(obj, a=3)
@@ -28,3 +32,4 @@ or using a `decorator`:
     ...     return obj.a
     >>> fn()
     3
+    ```
