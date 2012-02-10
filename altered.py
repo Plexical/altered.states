@@ -1,6 +1,11 @@
 from contextlib import contextmanager
 from functools import wraps
 
+try:
+    from contextlib import ContextDecorator
+except ImportError:
+    from contextdecorator import ContextDecorator
+
 class Expando(object):
     """
     A completely promiscous object that makes attributes out of
