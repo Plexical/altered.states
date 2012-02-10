@@ -25,9 +25,9 @@ manipulate your world via the `with` statement:
 or using a `decorator`:
 
 ```python
->>> import altered
->>> obj = altered.Expando(a=1)
->>> @altered.decostate(obj, a=3)
+>>> from altered import Expando, state
+>>> obj = Expando(a=1)
+>>> @state(obj, a=3)
 >>> def fn():
 ...     return obj.a
 >>> fn()

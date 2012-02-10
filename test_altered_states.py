@@ -1,6 +1,6 @@
 import pytest
 
-from altered import state, decostate, forget, Expando
+from altered import state, forget, Expando
 
 pytest_funcarg__obj = lambda request: Expando(a=1)
 pytest_funcarg__dct = lambda request: {'a':1}
@@ -54,7 +54,7 @@ def test_state_dict_forget(dct):
     assert dct == {'a':1}
 
 def test_decorator_obj(obj, objtest):
-    @decostate(obj, a=3, b=4)
+    @state(obj, a=3, b=4)
     def check(o):
         objtest(o, 3, 4)
     check(obj)
@@ -63,7 +63,7 @@ def test_decorator_obj(obj, objtest):
     assert not hasattr(obj, 'b')
 
 def test_decorator_dict(dct, dcttest):
-    @decostate(dct, a=5, b=6)
+    @state(dct, a=5, b=6)
     def check(d):
         dcttest(d, 5, 6)
     check(dct)
