@@ -1,11 +1,3 @@
-from contextlib import contextmanager
-from functools import wraps
-
-try:
-    from contextlib import ContextDecorator
-except ImportError:
-    from contextdecorator import ContextDecorator
-
 class Expando(object):
     """
     A completely promiscous object that makes attributes out of
@@ -82,29 +74,3 @@ def dictdel(dct, key):
     "Provides `delattr` semantics for modifiyng dictionaries."
     del dct[key]
 
-class state(ContextDecorator):
-
-    def __new__(self, orig, **attrs):
-        self.orig = orig
-        self.attrs = attrs
-        return ContextDecorator.__new__(self)
-
-    def __enter__(self):
-        if isinstance(self.orig, dict):
-            self.getter, self.setter, self.deleter = dictget, dictset, dictdel
-        else:
-            self.getter, self.setter, self.deleter = getattr, setattr, delattr
-        self.diff = change(self.orig, self.getter,
-                           self.setter, self.deleter, **self.attrs)
-        return self
-
-    def __exit__(self, *args, **kw):
-        restore(self.orig, self.diff, self.getter, self.setter, self.deleter)
-        return False
-
-    def __call__(self, f):
-        @wraps(f)
-        def decorated(*args, **kwds):
-            with self:
-                return f(*args, **kwds)
-        return decorated
