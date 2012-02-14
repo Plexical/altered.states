@@ -38,6 +38,3 @@ class state(ContextDecorator):
             with self:
                 return f(*args, **kwds)
         return decorated
-
-__all__ = ['state', 'forget', 'Expando']
-
