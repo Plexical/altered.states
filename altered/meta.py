@@ -1,0 +1,7 @@
+name='altered.states'
+version='0.8'
+licence='ISC'
+author='Jacob Oscarson'
+author_email='jacob@plexical.com'
+description = 'Monkey patching for Humans'
+url = 'https://github.com/Plexical/altered.states'

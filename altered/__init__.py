@@ -1,3 +1,5 @@
+from __future__ import with_statement
+
 from functools import wraps
 
 from altered.base import (dictget, dictset, dictdel, change,

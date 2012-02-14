@@ -8,3 +8,5 @@ share/
 .Python
 *.egg
 .eyes
+.tox/
+*.egg-info

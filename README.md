@@ -33,3 +33,6 @@ or using a `decorator`:
 >>> fn()
 3
 ```
+
+Altered States is known to run on Python 2.5, 2.6 and 27. Python 3+
+support should follow shortly.
