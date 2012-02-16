@@ -1,7 +1,5 @@
 from __future__ import with_statement
 
-import pytest
-
 from altered import state, forget, Expando
 
 pytest_funcarg__obj = lambda request: Expando(a=1)
