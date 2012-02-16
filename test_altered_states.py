@@ -89,6 +89,16 @@ def test_decorator_obj(obj, objtest):
     assert obj.a == 1
     assert not hasattr(obj, 'b')
 
+def test_decorator_obj_raises(obj, raisetest):
+    def b0rked(badness):
+        @state(obj, a=2)
+        def fn():
+            raise badness
+        fn()
+
+    raisetest(b0rked)
+    assert obj.a == 1
+
 def test_decorator_dict(dct, dcttest):
     @state(dct, a=5, b=6)
     def check(d):
