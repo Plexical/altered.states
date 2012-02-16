@@ -20,14 +20,12 @@ def pytest_funcarg__dcttest(request):
     return dct_check
 
 def pytest_funcarg__raisetest(request):
-    def raise_check(b0rked, restored):
+    def raise_check(b0rked):
         badness = Exception('Ops!')
         try:
             b0rked(badness)
         except Exception, e:
             assert e is badness
-        finally:
-            restored()
     return raise_check
 
 # @state(os.environ, DJANGO_SETTINGS_MODULE='proj.settings')
@@ -55,10 +53,9 @@ def test_ctxmgr_obj_raises(obj, raisetest):
     def b0rked(badness):
         with(state(obj, a=2)):
             raise badness
-    def restored():
-        assert obj.a == 1
 
-    raisetest(b0rked, restored)
+    raisetest(b0rked)
+    assert obj.a == 1
 
 def test_state_dict_extra(dct):
     with(state(dct, b=2, c=3)):
