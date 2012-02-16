@@ -107,3 +107,13 @@ def test_decorator_dict(dct, dcttest):
     assert check.func_name == 'check'
     assert dct['a'] == 1
     assert 'b' not in dct
+
+def test_decorator_dct_raises(dct, raisetest):
+    def b0rked(badness):
+        @state(dct, a=2)
+        def fn():
+            raise badness
+        fn()
+
+    raisetest(b0rked)
+    assert dct['a'] == 1
