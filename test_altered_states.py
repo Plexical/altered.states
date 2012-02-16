@@ -49,7 +49,7 @@ def test_state_obj_forget(obj):
         assert not hasattr(obj, 'a')
     assert obj.a == 1
 
-def test_ctxmgr_obj_raises(obj, raisetest):
+def test_state_obj_raises(obj, raisetest):
     def b0rked(badness):
         with(state(obj, a=2)):
             raise badness
