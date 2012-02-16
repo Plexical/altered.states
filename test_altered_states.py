@@ -72,6 +72,14 @@ def test_state_dict_forget(dct):
         assert dct == {}
     assert dct == {'a':1}
 
+def test_state_dct_raises(dct, raisetest):
+    def b0rked(badness):
+        with(state(dct, a=2)):
+            raise badness
+
+    raisetest(b0rked)
+    assert dct['a'] == 1
+
 def test_decorator_obj(obj, objtest):
     @state(obj, a=3, b=4)
     def check(o):
