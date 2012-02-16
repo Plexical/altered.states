@@ -26,10 +26,6 @@ def pytest_funcarg__raisetest(request):
             assert e is badness
     return raise_check
 
-# @state(os.environ, DJANGO_SETTINGS_MODULE='proj.settings')
-# def test_django_case():
-#     # ...
-
 def test_state_obj_extra(obj):
     with(state(obj, b=2, c=3)):
         assert obj.b == 2

@@ -1,0 +1,28 @@
+"""
+This isn't a test suite in the traditional sense (testing
+correctness), rather a test suite to verify assumptions I make about
+how Altered State should behave in a "realistic" environment.
+"""
+from __future__ import with_statement
+import sys
+import os
+import subprocess
+
+import pytest
+
+from StringIO import StringIO
+
+from altered import state
+
+def test_capture_stdout():
+    buf = StringIO()
+    print('Foo')
+    with(state(sys, stdout=buf)):
+        print('Bar')
+    assert buf.getvalue() == 'Bar' + os.linesep
+
+# Bit of a pain to set up, but sometime:
+# @state(os.environ, DJANGO_SETTINGS_MODULE='proj.settings')
+# def test_django_case():
+#     from proj import models
+#     stuff = models.Model.objects.filter(... # you get the idea
