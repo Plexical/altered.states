@@ -31,3 +31,5 @@ def test_patch_sys_modules():
     with(state(sys.modules, fakey=Expando(foo='bar'))):
         import fakey
         assert fakey.foo == 'bar'
+    with(pytest.raises(ImportError)):
+        import fakey
