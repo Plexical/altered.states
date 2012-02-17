@@ -1,7 +1,7 @@
 """
 This isn't a test suite in the traditional sense (testing
 correctness), rather a test suite to verify assumptions I make about
-how Altered State should behave in a "realistic" environment.
+how Altered States should behave in a "realistic" environment.
 """
 from __future__ import with_statement
 import sys
