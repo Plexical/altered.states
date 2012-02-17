@@ -12,7 +12,7 @@ import pytest
 
 from StringIO import StringIO
 
-from altered import state
+from altered import state, Expando
 
 def test_capture_stdout():
     buf = StringIO()
@@ -26,3 +26,8 @@ def test_capture_stdout():
 # def test_django_case():
 #     from proj import models
 #     stuff = models.Model.objects.filter(... # you get the idea
+
+def test_patch_sys_modules():
+    with(state(sys.modules, fakey=Expando(foo='bar'))):
+        import fakey
+        assert fakey.foo == 'bar'
