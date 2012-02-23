@@ -35,7 +35,6 @@ class state(ContextDecorator):
         return False
 
     def __call__(self, f):
-        print('__call__', id(self.orig))
         @wraps(f)
         def decorated(*args, **kwds):
             with self:
