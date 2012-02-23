@@ -34,6 +34,6 @@ def test_patch_sys_modules():
     with(pytest.raises(ImportError)):
         import fakey
 
+@state(globals(), injected='foo')
 def test_patch_module():
-    with(state(globals(), injected='foo')):
-        assert injected == 'foo'
+    assert injected == 'foo'

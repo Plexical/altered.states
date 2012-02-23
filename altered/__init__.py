@@ -16,10 +16,10 @@ class state(ContextDecorator):
     Altered States.
     """
 
-    def __new__(self, orig, **attrs):
+    def __init__(self, orig, **attrs):
         self.orig = orig
         self.attrs = attrs
-        return ContextDecorator.__new__(self)
+        return super(state, self).__init__()
 
     def __enter__(self):
         if isinstance(self.orig, dict):
@@ -35,6 +35,7 @@ class state(ContextDecorator):
         return False
 
     def __call__(self, f):
+        print('__call__', id(self.orig))
         @wraps(f)
         def decorated(*args, **kwds):
             with self:
