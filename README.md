@@ -11,8 +11,8 @@ sophisticated packages that does this. The thing with them is that
 they are all making a procedure that should be relatively simple quite
 complicated.
 
-Altered States tries to keep the API maximally simple. Either
-manipulate your world via the `with` statement:
+With Altered States you only call *one* function, `state`.  Manipulate
+your world via the `with` statement:
 
 ```python
 >>> from altered import Expando, state
