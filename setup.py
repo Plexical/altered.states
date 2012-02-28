@@ -17,8 +17,6 @@ setup(
     author=meta.author,
     author_email=meta.author_email,
     license='ISC',
-    include_package_data=True,
-    package_data={'': ['LICENSE.md',]},
     classifiers=(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
