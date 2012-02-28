@@ -4,7 +4,7 @@
 
 *Altered States* tries to take `@kennethreitz
 <https://github.com/kennethreitz>`_ concept of `Python for Humans
-<http://python-for-humans.heroku.com/>`_ and applies it to `monkey
+<http://python-for-humans.heroku.com/>`_ and apply it to `monkey
 patching <http://en.wikipedia.org/wiki/Monkey_patch>`_. A
 `search <http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch>`_ on
 PyPI shows that there are already many often technically sophisticated
