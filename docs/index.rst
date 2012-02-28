@@ -1,10 +1,37 @@
-.. Altered States documentation master file, created by
-   sphinx-quickstart on Tue Feb 28 16:40:29 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Altered States: humane monkey patching for Python
+=================================================
 
-Welcome to Altered States's documentation!
-==========================================
+Altered States is a way to simplify `monkey patching
+<http://en.wikipedia.org/wiki/Monkey_patch>`_ and make it more
+accessible. It was written with test fixture setup in mind but can be
+used for anything that needs a reversible and temporary drastic state
+change (switching between authenticated users, I/O redirection,
+probably more).
+
+You use Altered State by calling just *one* function, `altered.state()`.
+
+Either via a context manager (`with` statement):
+
+::
+
+    >>> from altered import Expando, state
+    >>> obj = Expando(a=1)
+    >>> with(state(obj, a=2)):
+    ...     print obj.a
+    2
+
+or using the same function as a a `decorator`:
+
+::
+
+    >>> from altered import Expando, state
+    >>> obj = Expando(a=1)
+    >>> @state(obj, a=3)
+    >>> def fn():
+    ...     return obj.a
+    >>> fn()
+    3
+
 
 Contents:
 
