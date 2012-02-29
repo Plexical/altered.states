@@ -119,11 +119,20 @@ def test_decorator_dct_raises(dct, raisetest):
     raisetest(b0rked)
     assert dct['a'] == 1
 
-@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
-def test_doctests():
+# XXX todo 1, parametrize alt. new try with py.test's real doctest runner
+def doctests(path):
     buf = StringIO()
     with(state(sys, stdout=buf)):
-        doctest.testfile('../README.rst')
+        doctest.testfile(path)
     res = buf.getvalue()
     if res != '':
         raise Exception(res)
+
+
+@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
+def test_readme():
+    doctests('../README.rst')
+
+@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
+def test_sphinxindex():
+    doctests('../docs/index.rst')
