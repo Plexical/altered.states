@@ -37,10 +37,9 @@ Purpose
 I implemented the code that later became Altered States beacuse I was
 unhappy about how fixture setup was obscuring actual test code in test
 suites, and that is also the recommended primary use of Altered
-States. But there's certainly a lot of other cases where a reversible
-change of the environment (switching between authenticated users,
-temporary I/O redirection, probably more) could be useful and reduce
-semantic clutter.
+States. But there are other usecases where a reversible change of the
+environment can be useful (switching between authenticated users,
+temporary I/O redirection, probably more).
 
 Expando objects
 ---------------
