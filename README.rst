@@ -50,9 +50,11 @@ temporary I/O redirection, probably more).
 Expando objects
 ---------------
 
-`Expando` objects is an optional feature in Altered States to create
-replacement structures more easy. It's basically an empty object that
-you can add any extra attributes to. Conceptually, it's just this::
+Altered States also contains an optional feature called **Expando**
+objects. They are a very simple type of object that can be used to
+create replacement structures easily. It's basically an empty object
+that you can add any extra attributes to, with a conceptual
+implementation along the lines of::
 
    class Expando(object):
        def __init__(self, *args, **kw):
@@ -67,6 +69,17 @@ you can create that with::
     >>> faked_ctx = Expando(user=Expando(login=lambda name, passwd: True))
     >>> faked_ctx.user.login('admin', 'foo')
     True
+
+If we revisit the second example, it can be expressed with an
+**Expando** object like this::
+
+    >>> from altered import Expando, state
+    >>> obj = Expando(a=1)
+    >>> @state(obj, a=3)
+    ... def fn():
+    ...     return obj.a
+    >>> fn()
+    3
 
 What was the name again?
 ------------------------
