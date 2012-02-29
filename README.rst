@@ -66,9 +66,9 @@ if you need an object with another object embedded that has a method
 you can create that with::
 
     >>> from altered import Expando
-    >>> faked_ctx = Expando(user=Expando(login=lambda name, passwd: True))
-    >>> faked_ctx.user.login('admin', 'foo')
-    True
+    >>> faked_ctx = Expando(user=Expando(get_name=lambda: 'Foo Bar'))
+    >>> faked_ctx.user.get_name()
+    'Foo Bar'
 
 If we revisit the second example, it can be expressed with an
 **Expando** object like this::
@@ -84,12 +84,10 @@ If we revisit the second example, it can be expressed with an
 What was the name again?
 ------------------------
 
-You mean you haven't seen the
-`movie <http://www.imdb.com/title/tt0080360/>`_? Go see it, it's a trip!  And
-take note of the implicit warning in the film of what happens if you
-take your usage too far.
+You mean you haven't seen the `movie
+<http://www.imdb.com/title/tt0080360/>`_? Go see it, it's a trip! And
+when you see it, take note of the implicit warning in the film of what
+happens if you take your usage too far:
 
-Which brings us to:
-
-**Caution:** *The whole* **idea** *of Altered States is to create
+*The whole* **idea** *of Altered States is to create
 side-effects. Please use Altered States responsibly.*
