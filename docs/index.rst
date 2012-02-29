@@ -1,4 +1,4 @@
-Altered States: humane monkey patching for Python
+Altered States: Python monkey-patching for Humans
 =================================================
 
 Altered States is a way to simplify `monkey patching
