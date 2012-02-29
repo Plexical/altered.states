@@ -24,7 +24,7 @@ or using a `decorator`::
     >>> from altered import Expando, state
     >>> obj = Expando(a=1)
     >>> @state(obj, a=3)
-    >>> def fn():
+    ... def fn():
     ...     return obj.a
     >>> fn()
     3

@@ -1,5 +1,12 @@
 from __future__ import with_statement
 
+import os
+import sys
+import doctest
+from StringIO import StringIO
+
+import pytest
+
 from altered import state, forget, Expando
 
 pytest_funcarg__obj = lambda request: Expando(a=1)
@@ -111,3 +118,12 @@ def test_decorator_dct_raises(dct, raisetest):
 
     raisetest(b0rked)
     assert dct['a'] == 1
+
+@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
+def test_doctests():
+    buf = StringIO()
+    with(state(sys, stdout=buf)):
+        doctest.testfile('../README.rst')
+    res = buf.getvalue()
+    if res != '':
+        raise Exception(res)
