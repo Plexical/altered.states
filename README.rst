@@ -81,6 +81,12 @@ If we revisit the second example, it can be expressed with an
     >>> fn()
     3
 
+Reference documentation
+-----------------------
+
+More detailed (but incomplete as of yet) documentation can be found at
+Read The Docs `here <http://altered-states.rtfd.org>`_.
+
 What was the name again?
 ------------------------
 
