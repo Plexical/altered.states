@@ -8,7 +8,7 @@ used for anything that needs a reversible and temporary drastic state
 change (switching between authenticated users, I/O redirection,
 probably more).
 
-You use Altered State by calling just *one* function, `altered.state()`.
+You use Altered State by calling just *one* function, :py:func:`state`.
 
 Either via a context manager (`with` statement)::
 
@@ -31,14 +31,17 @@ or using the same function as a a `decorator`::
     >>> fn()
     3
 
-This example also shows how **.state()** can be applied to **dict**'s
-as well as objects.
+This example also shows how :py:func:`state` can be applied to `dict` as
+well as objects.
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
+   expando
+   state-ref
+   forget
 
 
 Indices and tables
