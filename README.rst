@@ -34,8 +34,18 @@ or using a `decorator`:
     >>> fn()
     3
 
-Altered States is known to run on Python 2.5, 2.6 and 27. Python 3+
-support should follow shortly.
+Altered States has been verified to run on Python 2.5, 2.6 and 27.
+
+Purpose
+-------
+
+I implemented the code that later became Altered States beacuse I was
+unhappy about how fixture setup was obscuring actual test code in test
+suites, and that is also the recommended primary use of Altered
+States. But there's certainly a lot of other cases where a reversible
+change of the environment (switching between authenticated users,
+temporary I/O redirection, probably more) could be useful and reduce
+semantic clutter.
 
 Expando objects
 ---------------
@@ -57,17 +67,6 @@ you can create that with::
     >>> faked_ctx = Expando(user=Expando(login=lambda name, passwd: True))
     >>> faked_ctx.user.login('admin', 'foo')
     True
-
-Purpose
--------
-
-I implemented the code that later became Altered States beacuse I was
-unhappy about how fixture setup was obscuring actual test code in test
-suites, and that is also the recommended primary use of Altered
-States. But there's certainly a lot of other cases where a reversible
-change of the environment (switching between authenticated users,
-temporary I/O redirection, probably more) could be useful and reduce
-semantic clutter.
 
 What was the name again?
 ------------------------
