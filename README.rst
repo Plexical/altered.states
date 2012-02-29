@@ -51,10 +51,10 @@ Expando objects
 ---------------
 
 Altered States also contains an optional feature called **Expando**
-objects. They are a very simple type of object that can be used to
-create replacement structures easily. It's basically an empty object
-that you can add any extra attributes to, with a conceptual
-implementation along the lines of::
+objects. It's a simple object that can be used to create replacement
+structures easily. It's basically an empty object that you can add any
+extra attributes to, with a conceptual implementation along the lines
+of::
 
    class Expando(object):
        def __init__(self, *args, **kw):
