@@ -8,7 +8,7 @@ patching <http://en.wikipedia.org/wiki/Monkey_patch>`_. A `search
 <http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch>`_ on
 PyPI shows that there are already many often technically sophisticated
 packages that does this. The thing with them is that they are all
-making a procedure that should be relatively simple quite complicated.
+making a procedure that should be relatively simple complicated.
 
 With Altered States you only call *one* function, `altered.state()`.  Manipulate
 your world via the `with` statement::
