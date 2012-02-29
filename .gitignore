@@ -10,3 +10,4 @@ share/
 .eyes
 .tox/
 *.egg-info
+docs/_build/
