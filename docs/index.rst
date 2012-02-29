@@ -10,28 +10,29 @@ probably more).
 
 You use Altered State by calling just *one* function, `altered.state()`.
 
-Either via a context manager (`with` statement):
+Either via a context manager (`with` statement)::
 
-::
+    >>> import sys
+    >>> from StringIO import StringIO
+    >>> from altered import state
+    >>> buf = StringIO()
+    >>> with(state(sys, stdout=buf)):
+    ...     print 'foo'
+    >>> buf.getvalue()
+    'foo\n'
 
-    >>> from altered import Expando, state
-    >>> obj = Expando(a=1)
-    >>> with(state(obj, a=2)):
-    ...     print obj.a
-    2
+or using the same function as a a `decorator`::
 
-or using the same function as a a `decorator`:
-
-::
-
-    >>> from altered import Expando, state
-    >>> obj = Expando(a=1)
-    >>> @state(obj, a=3)
-    >>> def fn():
-    ...     return obj.a
+    >>> from altered import state
+    >>> struct = {'a': 1}
+    >>> @state(struct, a=3)
+    ... def fn():
+    ...     return struct['a']
     >>> fn()
     3
 
+This example also shows how **.state()** can be applied to **dict**'s
+as well as objects.
 
 Contents:
 
