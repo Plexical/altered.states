@@ -44,10 +44,8 @@ Contents:
    forget
 
 
-Indices and tables
-==================
+More
+====
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
