@@ -37,6 +37,27 @@ or using a `decorator`:
 Altered States is known to run on Python 2.5, 2.6 and 27. Python 3+
 support should follow shortly.
 
+Expando objects
+---------------
+
+`Expando` objects is an optional feature in Altered States to create
+replacement structures more easy. It's basically an empty object that
+you can add any extra attributes to. Conceptually, it's just this::
+
+   class Expando(object):
+       def __init__(self, *args, **kw):
+           self.__dict__.update(kw)
+
+Full source is marginally more complex, see `here
+<https://github.com/Plexical/altered.states/blob/master/altered/base.py#L1>`_. So
+if you need an object with another object embedded that has a method
+you can create that with::
+
+    >>> from altered import Expando
+    >>> faked_ctx = Expando(user=Expando(login=lambda name, passwd: True))
+    >>> faked_ctx.user.login('admin', 'foo')
+    True
+
 Purpose
 -------
 
