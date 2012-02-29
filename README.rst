@@ -58,5 +58,5 @@ take your usage too far.
 
 Which brings us to:
 
-***Caution:*** *The whole **idea** of Altered States is to create
+**Caution:** *The whole* **idea** *of Altered States is to create
 side-effects. Please use Altered States responsibly.*
