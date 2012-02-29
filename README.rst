@@ -8,10 +8,10 @@ patching <http://en.wikipedia.org/wiki/Monkey_patch>`_. A `search
 <http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch>`_ on
 PyPI shows that there are already many often technically sophisticated
 packages that does this. The thing with them is that they are all
-making a procedure that should be relatively simple complicated.
+gmaking a procedure that should be relatively simple complicated.
 
-With Altered States you only call *one* function, `altered.state()`.  Manipulate
-your world via the `with` statement::
+With Altered States you only call *one* function, **altered.state()**.
+Manipulate your world via the **with** statement::
 
     >>> import sys
     >>> from StringIO import StringIO
@@ -22,7 +22,7 @@ your world via the `with` statement::
     >>> buf.getvalue()
     'foo\n'
 
-or using a `decorator`::
+or using a **decorator**::
 
     >>> from altered import state
     >>> struct = {'a': 1}
@@ -32,8 +32,8 @@ or using a `decorator`::
     >>> fn()
     3
 
-This example also shows how `.state()` can be applied to `dict`'s as
-well as objects.
+This example also shows how **.state()** can be applied to **dict**'s
+as well as objects.
 
 Altered States has been verified to run on Python 2.5, 2.6 and 27.
 
