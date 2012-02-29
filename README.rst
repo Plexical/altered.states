@@ -12,9 +12,7 @@ packages that does this. The thing with them is that they are all
 making a procedure that should be relatively simple quite complicated.
 
 With Altered States you only call *one* function, `altered.state()`.  Manipulate
-your world via the `with` statement:
-
-::
+your world via the `with` statement::
 
     >>> from altered import Expando, state
     >>> obj = Expando(a=1)
@@ -22,9 +20,7 @@ your world via the `with` statement:
     ...     print obj.a
     2
 
-or using a `decorator`:
-
-::
+or using a `decorator`::
 
     >>> from altered import Expando, state
     >>> obj = Expando(a=1)
