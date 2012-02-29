@@ -13,21 +13,27 @@ making a procedure that should be relatively simple quite complicated.
 With Altered States you only call *one* function, `altered.state()`.  Manipulate
 your world via the `with` statement::
 
-    >>> from altered import Expando, state
-    >>> obj = Expando(a=1)
-    >>> with(state(obj, a=2)):
-    ...     print obj.a
-    2
+    >>> import sys
+    >>> from StringIO import StringIO
+    >>> from altered import state
+    >>> buf = StringIO()
+    >>> with(state(sys, stdout=buf)):
+    ...     print 'foo'
+    >>> buf.getvalue()
+    'foo\n'
 
 or using a `decorator`::
 
-    >>> from altered import Expando, state
-    >>> obj = Expando(a=1)
-    >>> @state(obj, a=3)
+    >>> from altered import state
+    >>> struct = {'a': 1}
+    >>> @state(struct, a=3)
     ... def fn():
-    ...     return obj.a
+    ...     return struct['a']
     >>> fn()
     3
+
+This example also shows how `.state()` can be applied to `dict`'s as
+well as objects.
 
 Altered States has been verified to run on Python 2.5, 2.6 and 27.
 
