@@ -11,3 +11,5 @@ share/
 .tox/
 *.egg-info
 docs/_build/
+docs/.mkhtml
+.wr
