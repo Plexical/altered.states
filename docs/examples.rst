@@ -34,3 +34,16 @@ In-place patching
     ...     return injected
     >>> fn()
     'foo'
+
+Deny the existance of a module
+------------------------------
+
+*It'd be much better if it would raise `ImportError` here. Maybee later.*
+
+    >>> import sys
+    >>> from altered import state, forget
+    >>> with(state(sys.modules, shutil=forget)):
+    ...     import shutil
+    Traceback (most recent call last):
+    KeyError: 'shutil'
+    >>> import shutil
