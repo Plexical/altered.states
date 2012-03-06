@@ -5,7 +5,7 @@
 *Altered States* tries to take the concept of `Python for Humans
 <http://python-for-humans.heroku.com/>`_ to the world of `monkey
 patching <http://en.wikipedia.org/wiki/Monkey_patch>`_. A `search
-<http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch>`_ on
+<http://pypi.python.org/pypi?%3Aaction=search&term=monkey+patch>`_ On
 PyPI shows that there are already many often technically sophisticated
 packages that does this. The thing with them is that they are all
 making a procedure that should be relatively simple complicated.
@@ -13,14 +13,13 @@ making a procedure that should be relatively simple complicated.
 With Altered States you only call *one* function, **altered.state()**.
 Manipulate your world via the **with** statement::
 
-    >>> import sys
-    >>> from StringIO import StringIO
     >>> from altered import state
-    >>> buf = StringIO()
-    >>> with(state(sys, stdout=buf)):
-    ...     print 'foo'
-    >>> buf.getvalue()
-    'foo\n'
+    >>> class Anon(object): pass
+    >>> o = Anon()
+    >>> o.foo = 'foo'
+    >>> with(state(o, foo='bar')):
+    ...     print o.foo
+    bar
 
 or using a **decorator**::
 
