@@ -12,14 +12,13 @@ You use Altered State by calling just *one* function, :py:func:`state`.
 
 Either via a context manager (`with` statement)::
 
-    >>> import sys
-    >>> from StringIO import StringIO
     >>> from altered import state
-    >>> buf = StringIO()
-    >>> with(state(sys, stdout=buf)):
-    ...     print 'foo'
-    >>> buf.getvalue()
-    'foo\n'
+    >>> class Anon(object): pass
+    >>> o = Anon()
+    >>> o.foo = 'foo'
+    >>> with(state(o, foo='bar')):
+    ...     print o.foo
+    bar
 
 or using the same function as a a `decorator`::
 
@@ -39,6 +38,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   examples
    expando
    state-ref
    forget

@@ -136,3 +136,7 @@ def test_readme():
 @pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
 def test_sphinxindex():
     doctests('../docs/index.rst')
+
+@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
+def test_sphinx_examples():
+    doctests('../docs/examples.rst')
