@@ -47,3 +47,16 @@ Deny the existance of a module
     Traceback (most recent call last):
     KeyError: 'shutil'
     >>> import shutil
+
+Nested structure
+----------------
+
+    >>> from altered import state, Expando
+    >>> ctx = Expando()
+    >>> idx = 0
+    >>> users = [Expando(name='Foo', get_token=lambda: 'xyz')]
+    >>> @state(ctx, users=users)
+    ... def token(idx):
+    ...     return ctx.users[idx].get_token()
+    >>> token(0)
+    'xyz'
