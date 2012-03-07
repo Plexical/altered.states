@@ -24,6 +24,7 @@ class Expando(object):
         return '<%s object at 0x%x%s%s>' % (
                 type(self).__name__, id(self), ': ' if a else '', a)
 
+E = Expando
 
 class forget:
     """
