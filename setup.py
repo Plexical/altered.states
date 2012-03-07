@@ -11,7 +11,7 @@ setup(
     name=meta.name,
     version=meta.version,
     description='Python monkey patching for humans.',
-    long_description=open('README.rst').read(),
+    long_description=meta.long_description,
     packages=('altered',),
     url=meta.url,
     author=meta.author,
