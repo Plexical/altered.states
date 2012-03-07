@@ -13,3 +13,4 @@ share/
 docs/_build/
 docs/.mkhtml
 .wr
+dist/
