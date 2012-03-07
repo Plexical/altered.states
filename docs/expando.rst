@@ -31,3 +31,6 @@ Using and `Expando` object with Altered States can look like this::
     ...     return obj.a
     >>> fn()
     3
+
+`Expando` classes are aliased to the name `E` if you're seeking
+maximum terseness.
