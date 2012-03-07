@@ -37,3 +37,7 @@ def test_patch_sys_modules():
 @state(globals(), injected='foo')
 def test_patch_module():
     assert injected == 'foo'
+
+@state(vars(), injected='foo')
+def test_patch_inplace():
+    assert injected == 'foo'

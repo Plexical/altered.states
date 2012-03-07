@@ -29,11 +29,22 @@ Faking an import
 In-place patching
 -----------------
 
+Module scope
+~~~~~~~~~~~~
+
     >>> @state(globals(), injected='foo')
     ... def fn():
     ...     return injected
     >>> fn()
     'foo'
+
+Local scope
+~~~~~~~~~~~
+
+    >>> from altered import state, E
+    >>> with state(vars(), injected='foo'):
+    ...    print injected
+    foo
 
 Deny the existance of a module
 ------------------------------
