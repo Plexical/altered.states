@@ -80,6 +80,14 @@ If we revisit the second example, it can be expressed with an
     >>> fn()
     3
 
+*In upcoming version (or if cloned from Git):*
+
+**Expando** is also aliased to the shorter name **E** for terser
+nesting::
+
+   >>> from altered import E
+   >>> fakey = E(substruct=E(membr='foo', method=lambda: 'x'))
+
 Reference documentation
 -----------------------
 
