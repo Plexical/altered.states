@@ -24,6 +24,9 @@ class Expando(object):
         return '<%s object at 0x%x%s%s>' % (
                 type(self).__name__, id(self), ': ' if a else '', a)
 
+    def __nonzero__(self):
+        return bool(self.__dict__)
+
 E = Expando
 
 class forget:
