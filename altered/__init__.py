@@ -22,7 +22,7 @@ class state(ContextDecorator):
         return super(state, self).__init__()
 
     def __enter__(self):
-        if isinstance(self.orig, dict):
+        if hasattr(self.orig, '__getitem__'):
             self.getter, self.setter, self.deleter = dictget, dictset, dictdel
         else:
             self.getter, self.setter, self.deleter = getattr, setattr, delattr
