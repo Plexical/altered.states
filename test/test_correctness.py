@@ -9,22 +9,30 @@ import pytest
 
 from altered import state, forget, Expando
 
-pytest_funcarg__obj = lambda request: Expando(a=1)
-pytest_funcarg__dct = lambda request: {'a':1}
+@pytest.fixture
+def obj():
+    return Expando(a=1)
 
-def pytest_funcarg__objtest(request):
+@pytest.fixture
+def dct():
+    return {'a': 1}
+
+@pytest.fixture
+def objtest():
     def o_check(obj, a, b):
         assert obj.a == a
         assert obj.b == b
     return o_check
 
-def pytest_funcarg__dcttest(request):
+@pytest.fixture
+def dcttest():
     def dct_check(dct, a, b):
         assert dct['a'] == a
         assert dct['b'] == b
     return dct_check
 
-def pytest_funcarg__raisetest(request):
+@pytest.fixture
+def raisetest():
     def raise_check(b0rked):
         badness = Exception('Ops!')
         try:
