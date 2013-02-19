@@ -127,20 +127,6 @@ def test_decorator_dct_raises(dct, raisetest):
     raisetest(b0rked)
     assert dct['a'] == 1
 
-def test_os_environ():
-    with state(os.environ, ALTERED='states'):
-        assert os.environ['ALTERED'] == 'states'
-
-    assert 'ALTERED' not in os.environ
-
-def test_decorator_os_environ():
-    @state(os.environ, ALTERED='states')
-    def check():
-        return os.environ['ALTERED']
-
-    assert check() == 'states'
-    assert 'ALTERED' not in os.environ
-
 # XXX todo 1, parametrize alt. new try with py.test's real doctest runner
 def doctests(path):
     buf = StringIO()

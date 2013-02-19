@@ -41,3 +41,17 @@ def test_patch_module():
 @state(vars(), injected='foo')
 def test_patch_inplace():
     assert injected == 'foo'
+
+def test_os_environ():
+    with state(os.environ, ALTERED='states'):
+        assert os.environ['ALTERED'] == 'states'
+
+    assert 'ALTERED' not in os.environ
+
+def test_decorator_os_environ():
+    @state(os.environ, ALTERED='states')
+    def check():
+        return os.environ['ALTERED']
+
+    assert check() == 'states'
+    assert 'ALTERED' not in os.environ
