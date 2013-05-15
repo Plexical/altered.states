@@ -1,3 +1,9 @@
+0.9
+---
+
+* Added a new API entry point: `alter()`, that can be used to perform
+  a two-step reversible alteration.
+
 0.8.2
 -----
 

@@ -10,8 +10,8 @@ PyPI shows that there are already many often technically sophisticated
 packages that does this. The thing with them is that they are all
 making a procedure that should be relatively simple complicated.
 
-With Altered States you only call *one* function, **altered.state()**.
-Manipulate your world via the **with** statement::
+With Altered States you get to choose between two functions, one that
+can either manipulate your world via a **with** statement::
 
     >>> from altered import state
     >>> class Anon(object): pass
@@ -33,6 +33,35 @@ or using a **decorator**::
 
 This example also shows how **.state()** can be applied to **dict**'s
 as well as objects.
+
+From version `0.8.5`, you can also make changes in two steps (e.g. if
+you need setup/teardown steps in a test) using the
+**.alter()** function::
+
+    >>> from altered import alter, E
+    >>> o = E(foo='foo')
+    >>> restore = alter(o, foo='bar')
+    >>> print(o.foo)
+    bar
+    >>> restore()
+    >>> print(o.foo)
+    foo
+
+Just like **.state()**, **.alter()** works on **dict**'s too::
+
+    >>> from altered import alter
+    >>> struct = {'a': 1}
+    >>> restore = alter(struct, a=3)
+    >>> print(struct)
+    {'a': 3}
+    >>> restore()
+    >>> print(struct)
+    {'a': 1}
+
+**.alter()** can of course not keep track of downstream Exceptions
+like **.state()** can, so if you need to guarantee state restoration,
+it's up to you to ensure that the returned restoration function is
+actually called.
 
 Altered States has been verified to run on Python 2.5, 2.6 and 27.
 

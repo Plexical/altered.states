@@ -7,7 +7,7 @@ from StringIO import StringIO
 
 import pytest
 
-from altered import state, forget, Expando
+from altered import state, forget, alter, Expando
 
 @pytest.fixture
 def obj():
@@ -127,6 +127,32 @@ def test_decorator_dct_raises(dct, raisetest):
     raisetest(b0rked)
     assert dct['a'] == 1
 
+def test_alter_obj_extra(obj):
+    restore = alter(obj, b=2, c=3)
+    assert obj.b == 2
+    assert obj.c == 3
+    restore()
+    assert not hasattr(obj, 'b')
+    assert not hasattr(obj, 'c')
+
+def test_alter_obj_overwrite(obj):
+    restore = alter(obj, a=2)
+    assert obj.a == 2
+    restore()
+    assert obj.a == 1
+
+def test_alter_obj_forget(obj):
+    restore = alter(obj, a=forget)
+    assert not hasattr(obj, 'a')
+    restore()
+    assert obj.a == 1
+
+def test_alter_dict_extra(dct):
+    restore = alter(dct, b=2, c=3)
+    assert dct == {'a': 1, 'b': 2, 'c': 3}
+    restore()
+    assert dct == {'a': 1}
+
 # XXX todo 1, parametrize alt. new try with py.test's real doctest runner
 def doctests(path):
     buf = StringIO()
@@ -135,7 +161,6 @@ def doctests(path):
     res = buf.getvalue()
     if res != '':
         raise Exception(res)
-
 
 @pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
 def test_readme():
