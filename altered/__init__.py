@@ -3,7 +3,7 @@ from __future__ import with_statement
 from functools import wraps
 
 from altered.base import (dictget, dictset, dictdel, change,
-                          restore, Expando, E, forget)
+                          restore, Expando, E, forget, dictlike)
 
 try:
     from contextlib import ContextDecorator
@@ -14,8 +14,7 @@ def changers(obj):
     """
     Chooses suitable change operations for `obj`.
     """
-    return (hasattr(obj, '__getitem__') and
-            (dictget, dictset, dictdel) or
+    return (dictlike(obj) and (dictget, dictset, dictdel) or
             (getattr, setattr, delattr) )
 
 class state(ContextDecorator):

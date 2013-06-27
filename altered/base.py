@@ -1,3 +1,5 @@
+import collections
+
 class Expando(object):
     """
     A completely promiscous object that makes attributes out of
@@ -65,6 +67,10 @@ def restore(orig, diff, getter, setter, deleter):
             deleter(orig, key)
         else:
             setter(orig, key, old)
+
+def dictlike(cand):
+    "Determines if `dict` or `object` semantics should be used"
+    return isinstance(cand, collections.Mapping)
 
 def dictget(dct, key, default):
     "Provides `getattr` semantics for modifying dictionaries."
