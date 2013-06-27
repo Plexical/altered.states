@@ -1,5 +1,5 @@
 name='altered.states'
-version='0.8.5'
+version='0.8.6'
 licence='ISC'
 author='Jacob Oscarson'
 author_email='jacob@plexical.com'
