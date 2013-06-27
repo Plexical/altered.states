@@ -1,3 +1,10 @@
+0.8.6
+-----
+
+* Better handling of objects that override `__getitem__` (thanks to
+  @merwok).
+* Drop support for Python 2.5 (no sane way to solve issue #4 there).
+
 0.8.5
 -----
 
