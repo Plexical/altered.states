@@ -55,3 +55,14 @@ def test_decorator_os_environ():
 
     assert check() == 'states'
     assert 'ALTERED' not in os.environ
+
+@pytest.fixture
+def w_getitem():
+    class implements_getitem(object):
+        def __getitem__(self, key):
+            return 'foo'
+    return implements_getitem()
+
+def test_getitem_overridable(w_getitem):
+    with state(w_getitem, any='changed'):
+        assert w_getitem.any == 'changed'
