@@ -17,7 +17,7 @@ can either manipulate your world via a **with** statement::
     >>> class Anon(object): pass
     >>> o = Anon()
     >>> o.foo = 'foo'
-    >>> with(state(o, foo='bar')):
+    >>> with state(o, foo='bar'):
     ...     print o.foo
     bar
 

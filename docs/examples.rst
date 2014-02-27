@@ -11,7 +11,7 @@ I/O redirection
     >>> from StringIO import StringIO
     >>> from altered import state
     >>> buf = StringIO()
-    >>> with(state(sys, stdout=buf)):
+    >>> with state(sys, stdout=buf):
     ...     print 'foo'
     >>> buf.getvalue()
     'foo\n'
@@ -21,7 +21,7 @@ Faking an import
 
     >>> import sys
     >>> from altered import state, Expando
-    >>> with(state(sys.modules, fakey=Expando(foo='bar') )):
+    >>> with state(sys.modules, fakey=Expando(foo='bar') ):
     ...     import fakey
     ...     print fakey.foo
     bar
@@ -53,7 +53,7 @@ Deny the existance of a module
 
     >>> import sys
     >>> from altered import state, forget
-    >>> with(state(sys.modules, shutil=forget)):
+    >>> with state(sys.modules, shutil=forget):
     ...     import shutil
     Traceback (most recent call last):
     KeyError: 'shutil'
