@@ -40,48 +40,48 @@ def raisetest():
     return raise_check
 
 def test_state_obj_extra(obj):
-    with(state(obj, b=2, c=3)):
+    with state(obj, b=2, c=3):
         assert obj.b == 2
         assert obj.c == 3
     assert not hasattr(obj, 'b')
     assert not hasattr(obj, 'c')
 
 def test_state_obj_overwrite(obj):
-    with(state(obj, a=2)):
+    with state(obj, a=2):
         assert obj.a == 2
     assert obj.a == 1
 
 def test_state_obj_forget(obj):
-    with(state(obj, a=forget)):
+    with state(obj, a=forget):
         assert not hasattr(obj, 'a')
     assert obj.a == 1
 
 def test_state_obj_raises(obj, raisetest):
     def b0rked(badness):
-        with(state(obj, a=2)):
+        with state(obj, a=2):
             raise badness
 
     raisetest(b0rked)
     assert obj.a == 1
 
 def test_state_dict_extra(dct):
-    with(state(dct, b=2, c=3)):
+    with state(dct, b=2, c=3):
         assert dct == {'a':1, 'b':2, 'c':3}
     assert dct == {'a':1}
 
 def test_state_dict_overwrite(dct):
-    with(state(dct, a=2)):
+    with state(dct, a=2):
         assert dct == {'a':2}
     assert dct == {'a':1}
 
 def test_state_dict_forget(dct):
-    with(state(dct, a=forget)):
+    with state(dct, a=forget):
         assert dct == {}
     assert dct == {'a':1}
 
 def test_state_dct_raises(dct, raisetest):
     def b0rked(badness):
-        with(state(dct, a=2)):
+        with state(dct, a=2):
             raise badness
 
     raisetest(b0rked)
@@ -154,10 +154,11 @@ def test_alter_dict_extra(dct):
 # XXX todo 1, parametrize alt. new try with py.test's real doctest runner
 def doctests(path):
     buf = StringIO()
-    with(state(sys, stdout=buf)):
+    with state(sys, stdout=buf):
         doctest.testfile(path)
     res = buf.getvalue()
     if res != '':
+        # import ipdb; ipdb.set_trace()
         raise Exception(res)
 
 @pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
