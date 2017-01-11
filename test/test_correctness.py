@@ -4,6 +4,7 @@ import doctest
 from StringIO import StringIO
 
 import pytest
+from pytest import raises
 
 from altered import state, forget, alter, Expando
 
@@ -29,16 +30,6 @@ def dcttest():
         assert dct['b'] == b
     return dct_check
 
-@pytest.fixture
-def raisetest():
-    def raise_check(b0rked):
-        badness = Exception('Ops!')
-        try:
-            b0rked(badness)
-        except Exception, e:
-            assert e is badness
-    return raise_check
-
 def test_state_obj_extra(obj):
     with state(obj, b=2, c=3):
         assert obj.b == 2
@@ -56,12 +47,12 @@ def test_state_obj_forget(obj):
         assert not hasattr(obj, 'a')
     assert obj.a == 1
 
-def test_state_obj_raises(obj, raisetest):
-    def b0rked(badness):
-        with state(obj, a=2):
-            raise badness
+class CertainException(Exception): pass
 
-    raisetest(b0rked)
+def test_state_obj_raises(obj):
+    with raises(CertainException):
+        with state(obj, a=2):
+            raise CertainException()
     assert obj.a == 1
 
 def test_state_dict_extra(dct):
@@ -79,12 +70,10 @@ def test_state_dict_forget(dct):
         assert dct == {}
     assert dct == {'a':1}
 
-def test_state_dct_raises(dct, raisetest):
-    def b0rked(badness):
+def test_state_dct_raises(dct):
+    with raises(CertainException):
         with state(dct, a=2):
-            raise badness
-
-    raisetest(b0rked)
+            raise CertainException()
     assert dct['a'] == 1
 
 def test_decorator_obj(obj, objtest):
@@ -96,14 +85,15 @@ def test_decorator_obj(obj, objtest):
     assert obj.a == 1
     assert not hasattr(obj, 'b')
 
-def test_decorator_obj_raises(obj, raisetest):
-    def b0rked(badness):
+def test_decorator_obj_raises(obj):
+    def b0rk(badness):
         @state(obj, a=2)
         def fn():
             raise badness
         fn()
 
-    raisetest(b0rked)
+    with raises(CertainException):
+        b0rk(CertainException())
     assert obj.a == 1
 
 def test_decorator_dict(dct, dcttest):
@@ -115,14 +105,15 @@ def test_decorator_dict(dct, dcttest):
     assert dct['a'] == 1
     assert 'b' not in dct
 
-def test_decorator_dct_raises(dct, raisetest):
-    def b0rked(badness):
+def test_decorator_dct_raises(dct):
+    def b0rk(badness):
         @state(dct, a=2)
         def fn():
             raise badness
         fn()
 
-    raisetest(b0rked)
+    with raises(CertainException):
+        b0rk(CertainException())
     assert dct['a'] == 1
 
 def test_alter_obj_extra(obj):
