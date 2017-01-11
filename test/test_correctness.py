@@ -141,25 +141,3 @@ def test_alter_dict_extra(dct):
     assert dct == {'a': 1, 'b': 2, 'c': 3}
     restore()
     assert dct == {'a': 1}
-
-# XXX todo 1, parametrize alt. new try with py.test's real doctest runner
-def doctests(path):
-    buf = StringIO()
-    with state(sys, stdout=buf):
-        doctest.testfile(path)
-    res = buf.getvalue()
-    if res != '':
-        # import ipdb; ipdb.set_trace()
-        raise Exception(res)
-
-@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
-def test_readme():
-    doctests('../README.rst')
-
-@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
-def test_sphinxindex():
-    doctests('../docs/index.rst')
-
-@pytest.mark.skipif("sys.version_info[0:2] == (2,5)")
-def test_sphinx_examples():
-    doctests('../docs/examples.rst')
