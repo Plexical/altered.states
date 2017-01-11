@@ -56,6 +56,7 @@ Deny the existance of a module
     >>> with state(sys.modules, shutil=forget):
     ...     import shutil
     Traceback (most recent call last):
+        ...
     KeyError: 'shutil'
     >>> import shutil
 
