@@ -18,3 +18,4 @@ poc.py
 .cache/
 htmlcov/
 .coverage
+.python-version
