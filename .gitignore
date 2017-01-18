@@ -16,3 +16,5 @@ docs/.mkhtml
 dist/
 poc.py
 .cache/
+htmlcov/
+.coverage
