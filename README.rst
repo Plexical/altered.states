@@ -18,7 +18,7 @@ can either manipulate your world via a **with** statement::
     >>> o = Anon()
     >>> o.foo = 'foo'
     >>> with state(o, foo='bar'):
-    ...     print o.foo
+    ...     print(o.foo)
     bar
 
 or using a **decorator**::

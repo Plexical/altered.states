@@ -12,7 +12,7 @@ I/O redirection
     >>> from altered import state
     >>> buf = StringIO()
     >>> with state(sys, stdout=buf):
-    ...     print 'foo'
+    ...     print('foo')
     >>> buf.getvalue()
     'foo\n'
 
@@ -23,7 +23,7 @@ Faking an import
     >>> from altered import state, Expando
     >>> with state(sys.modules, fakey=Expando(foo='bar') ):
     ...     import fakey
-    ...     print fakey.foo
+    ...     print(fakey.foo)
     bar
 
 In-place patching
@@ -43,7 +43,7 @@ Local scope
 
     >>> from altered import state, E
     >>> with state(vars(), injected='foo'):
-    ...    print injected
+    ...    print(injected)
     foo
 
 Deny the existance of a module
