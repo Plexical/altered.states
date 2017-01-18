@@ -66,3 +66,8 @@ def w_getitem():
 def test_getitem_overridable(w_getitem):
     with state(w_getitem, any='changed'):
         assert w_getitem.any == 'changed'
+
+def test_deny_module():
+    with pytest.raises(ImportError):
+        with state(sys.modules, shutil=None):
+            import shutil

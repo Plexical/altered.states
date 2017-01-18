@@ -49,15 +49,13 @@ Local scope
 Deny the existance of a module
 ------------------------------
 
-*It'd be much better if it would raise `ImportError` here. Maybee later.*
-
     >>> import sys
-    >>> from altered import state, forget
-    >>> with state(sys.modules, shutil=forget):
+    >>> from altered import state
+    >>> with state(sys.modules, shutil=None):
     ...     import shutil
     Traceback (most recent call last):
         ...
-    KeyError: 'shutil'
+    ImportError: No module named shutil
     >>> import shutil
 
 Nested structure
