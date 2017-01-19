@@ -1,3 +1,7 @@
+.PHONY tox:
+tox:
+	detox
+
 .PHONY cov:
 cov:
 	py.test -x --cov altered --cov-config=coverage.ini \
