@@ -1,3 +1,10 @@
+try:
+    from future import standard_library
+    standard_library.install_aliases()
+    from builtins import object
+except ImportError:
+    pass
+
 import collections
 
 class Expando(object):
@@ -22,16 +29,16 @@ class Expando(object):
 
         Thanks Chris Jones
         """
-        a = ', '.join('%s=%r' % i for i in self.__dict__.items())
+        a = ', '.join('%s=%r' % i for i in list(self.__dict__.items()))
         return '<%s object at 0x%x%s%s>' % (
                 type(self).__name__, id(self), ': ' if a else '', a)
 
-    def __nonzero__(self):
+    def __bool__(self):
         return bool(self.__dict__)
 
 E = Expando
 
-class forget:
+class forget(object):
     """
     Marker class to signal a value that should be deleted in an
     Altered States run.
@@ -48,7 +55,7 @@ def change(orig, getter, setter, deleter, **attrs):
     it's original state.
     """
     diff = {}
-    for key, val in attrs.iteritems():
+    for key, val in attrs.items():
         diff[key] = getter(orig, key, forget)
         if val is forget:
             deleter(orig, key)
@@ -62,7 +69,7 @@ def restore(orig, diff, getter, setter, deleter):
     make it revert to the state it had before `change()` was called on
     it.
     """
-    for key, old in diff.iteritems():
+    for key, old in diff.items():
         if old is forget:
             deleter(orig, key)
         else:

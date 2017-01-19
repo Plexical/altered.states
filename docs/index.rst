@@ -23,8 +23,8 @@ context manager (`with` statement)::
     >>> class Anon(object): pass
     >>> o = Anon()
     >>> o.foo = 'foo'
-    >>> with(state(o, foo='bar')):
-    ...     print o.foo
+    >>> with state(o, foo='bar'):
+    ...     print(o.foo)
     bar
 
 or using the same function as a a `decorator`::

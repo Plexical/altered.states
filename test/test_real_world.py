@@ -3,19 +3,22 @@ This isn't a test suite in the traditional sense (testing
 correctness), rather a test suite to verify assumptions I make about
 how Altered States should behave in a "realistic" environment.
 """
-from __future__ import with_statement
+from __future__ import print_function, with_statement
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import sys
 import os
 import subprocess
 
 import pytest
 
-from StringIO import StringIO
+from io import StringIO
 
-from altered import state, Expando
+from altered import state, Expando, py23compat
 
 def test_capture_stdout():
-    buf = StringIO()
+    buf = py23compat.strio()
     print('Foo')
     with(state(sys, stdout=buf)):
         print('Bar')

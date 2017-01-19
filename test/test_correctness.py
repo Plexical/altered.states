@@ -1,7 +1,7 @@
 import os
 import sys
 import doctest
-from StringIO import StringIO
+from io import StringIO
 
 import pytest
 from pytest import raises
@@ -81,7 +81,7 @@ def test_decorator_obj(obj, objtest):
     def check(o):
         objtest(o, 3, 4)
     check(obj)
-    assert check.func_name == 'check'
+    assert check.__name__ == 'check'
     assert obj.a == 1
     assert not hasattr(obj, 'b')
 
@@ -101,7 +101,7 @@ def test_decorator_dict(dct, dcttest):
     def check(d):
         dcttest(d, 5, 6)
     check(dct)
-    assert check.func_name == 'check'
+    assert check.__name__ == 'check'
     assert dct['a'] == 1
     assert 'b' not in dct
 

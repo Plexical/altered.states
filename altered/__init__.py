@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from functools import wraps
 
 from altered.base import (dictget, dictset, dictdel, change,
@@ -6,7 +7,7 @@ from altered.base import (dictget, dictset, dictdel, change,
 try:
     from contextlib import ContextDecorator
 except ImportError:
-    from contextdecorator import ContextDecorator
+    from .contextdecorator import ContextDecorator
 
 def changers(obj):
     """

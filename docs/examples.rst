@@ -8,9 +8,8 @@ I/O redirection
 ---------------
 
     >>> import sys
-    >>> from StringIO import StringIO
-    >>> from altered import state
-    >>> buf = StringIO()
+    >>> from altered import state, py23compat
+    >>> buf = py23compat.strio()
     >>> with state(sys, stdout=buf):
     ...     print('foo')
     >>> buf.getvalue()
@@ -52,10 +51,10 @@ Deny the existance of a module
     >>> import sys
     >>> from altered import state
     >>> with state(sys.modules, shutil=None):
-    ...     import shutil
+    ...     import shutil # doctest: +SKIP
     Traceback (most recent call last):
         ...
-    ImportError: No module named shutil
+    ModuleNotFoundError: import of 'shutil' halted; None in sys.modules
     >>> import shutil
 
 Nested structure

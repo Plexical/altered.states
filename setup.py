@@ -17,6 +17,9 @@ setup(
     url=meta.url,
     author=meta.author,
     author_email=meta.author_email,
+    install_requires=(
+        'future>=0.16.0',
+    ),
     license='ISC',
     classifiers=(
         'Programming Language :: Python',
