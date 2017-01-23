@@ -1,8 +1,8 @@
 name='altered.states'
-version='0.8.6'
+version='1.0.0'
 licence='ISC'
 author='Jacob Oscarson'
-author_email='jacob@plexical.com'
+author_email='jacob@414soft.com'
 description = 'Monkey patching for Humans'
 long_description = """
 =================================
@@ -15,8 +15,5 @@ patching.
 
 Read more here:
 https://github.com/Plexical/altered.states/blob/master/README.rst
-
-Initial announcement:
-http://www.plexical.com/blog/2012/03/06/altered-states/
 """
 url = 'https://github.com/Plexical/altered.states'
