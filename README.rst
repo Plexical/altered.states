@@ -63,7 +63,7 @@ like **.state()** can, so if you need to guarantee state restoration,
 it's up to you to ensure that the returned restoration function is
 actually called.
 
-Altered States has been verified to run on Python 2.5, 2.6 and 27.
+Altered States runs on Python 2.7 and 3.5+.
 
 Purpose
 -------
