@@ -1,3 +1,18 @@
+1.0.1
+-----
+
+* Fixed issue in setup.py script
+* Added missing changelog
+
+1.0.0
+-----
+
+* Altered States now runs on Python 3 (tested on 2.7, 3.5 and 3.6)
+* Dropped support for Python 2.6
+* Experimental support for Kenneth Reitz Pipenv tool
+* Corrected invalid use of `os.modules` in examples
+* Altered States is now coveraged by `coverage.py`
+
 0.8.6
 -----
 
