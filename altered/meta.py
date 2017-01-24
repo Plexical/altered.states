@@ -1,5 +1,5 @@
 name='altered.states'
-version='1.0.0'
+version='1.0.1'
 licence='ISC'
 author='Jacob Oscarson'
 author_email='jacob@414soft.com'
