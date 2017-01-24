@@ -21,7 +21,7 @@ setup(
         'future>=0.16.0',
     ),
     license='ISC',
-    classifiers=(
+    classifiers=[
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
@@ -29,5 +29,5 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Operating System :: OS Independent',
-    ),
+    ],
 )
