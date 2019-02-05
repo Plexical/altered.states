@@ -74,3 +74,10 @@ def test_deny_module():
     with pytest.raises(ImportError):
         with state(sys.modules, shutil=None):
             import shutil
+
+def test_nested_context():
+    "Should handle nested context managers correctly"
+    env = Expando(foo='bar', bar='baz')
+    with state(env, foo='baz') as _, state(env, bar='foo') as _:
+        assert env.foo == 'baz'
+        assert env.bar == 'foo'
