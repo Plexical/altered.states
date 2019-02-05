@@ -77,7 +77,7 @@ def restore(orig, diff, getter, setter, deleter):
 
 def dictlike(cand):
     "Determines if `dict` or `object` semantics should be used"
-    return isinstance(cand, collections.Mapping)
+    return isinstance(cand, collections.abc.Mapping)
 
 def dictget(dct, key, default):
     "Provides `getattr` semantics for modifying dictionaries."
