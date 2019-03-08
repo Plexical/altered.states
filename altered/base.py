@@ -1,3 +1,5 @@
+import sys
+
 try:
     from future import standard_library
     standard_library.install_aliases()
@@ -6,6 +8,12 @@ except ImportError:
     pass
 
 import collections
+
+if int(sys.version_info[0]) < 3:
+    Mapping = collections.Mapping
+else:
+    Mapping = collections.abc.Mapping
+
 
 class Expando(object):
     """
@@ -77,7 +85,7 @@ def restore(orig, diff, getter, setter, deleter):
 
 def dictlike(cand):
     "Determines if `dict` or `object` semantics should be used"
-    return isinstance(cand, collections.abc.Mapping)
+    return isinstance(cand, Mapping)
 
 def dictget(dct, key, default):
     "Provides `getattr` semantics for modifying dictionaries."
