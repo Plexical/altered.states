@@ -1,3 +1,5 @@
+import sys
+
 try:
     from future import standard_library
     standard_library.install_aliases()
@@ -6,6 +8,12 @@ except ImportError:
     pass
 
 import collections
+
+if int(sys.version_info[0]) < 3:
+    Mapping = collections.Mapping
+else:
+    Mapping = collections.abc.Mapping
+
 
 class Expando(object):
     """
@@ -30,19 +38,22 @@ class Expando(object):
         Thanks Chris Jones
         """
         a = ', '.join('%s=%r' % i for i in list(self.__dict__.items()))
-        return '<%s object at 0x%x%s%s>' % (
-                type(self).__name__, id(self), ': ' if a else '', a)
+        return '<%s object at 0x%x%s%s>' % (type(self).__name__, id(self),
+                                            ': ' if a else '', a)
 
     def __bool__(self):
         return bool(self.__dict__)
 
+
 E = Expando
+
 
 class forget(object):
     """
     Marker class to signal a value that should be deleted in an
     Altered States run.
     """
+
 
 def change(orig, getter, setter, deleter, **attrs):
     """
@@ -63,6 +74,7 @@ def change(orig, getter, setter, deleter, **attrs):
             setter(orig, key, val)
     return diff
 
+
 def restore(orig, diff, getter, setter, deleter):
     """
     Takes a diff produced by `change()` and applies it to `orig` to
@@ -75,19 +87,22 @@ def restore(orig, diff, getter, setter, deleter):
         else:
             setter(orig, key, old)
 
+
 def dictlike(cand):
     "Determines if `dict` or `object` semantics should be used"
-    return isinstance(cand, collections.Mapping)
+    return isinstance(cand, Mapping)
+
 
 def dictget(dct, key, default):
     "Provides `getattr` semantics for modifying dictionaries."
     return dct.get(key, default)
 
+
 def dictset(dct, key, val):
     "Provides `setattr` semantics for modifying dictionaries."
     dct[key] = val
 
+
 def dictdel(dct, key):
     "Provides `delattr` semantics for modifiyng dictionaries."
     del dct[key]
-
