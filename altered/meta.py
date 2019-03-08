@@ -1,8 +1,8 @@
-name='altered_states'
-version='1.0.9'
-licence='Apache Licence 2.0'
-author='Jacob Oscarson'
-author_email='jacob@414soft.com'
+name = 'altered_states'
+version = '1.0.9'
+licence = 'Apache Licence 2.0'
+author = 'Jacob Oscarson'
+author_email = 'jacob@414soft.com'
 description = 'Reversible state tool'
 long_description = """
 =================================
