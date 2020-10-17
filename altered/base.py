@@ -5,14 +5,12 @@ try:
 except ImportError:
     pass
 
-import collections
 
 class Expando(object):
     """
     A completely promiscous object that makes attributes out of
     key/value parameters to it's `__init__()` method.
     """
-
     def __init__(self, *args, **kw):
         self.update(**kw)
 
