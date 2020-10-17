@@ -1,20 +1,22 @@
 from __future__ import absolute_import
 from functools import wraps
 
-from altered.base import (dictget, dictset, dictdel, change,
-                          restore, Expando, E, forget, dictlike)
+from altered.base import (dictget, dictset, dictdel, change, restore, Expando,
+                          E, forget, dictlike)
 
 try:
     from contextlib import ContextDecorator
 except ImportError:
     from .contextdecorator import ContextDecorator
 
+
 def changers(obj):
     """
     Chooses suitable change operations for `obj`.
     """
-    return (dictlike(obj) and (dictget, dictset, dictdel) or
-            (getattr, setattr, delattr) )
+    return (dictlike(obj) and (dictget, dictset, dictdel)
+            or (getattr, setattr, delattr))
+
 
 class state(ContextDecorator):
     """
@@ -29,8 +31,8 @@ class state(ContextDecorator):
 
     def __enter__(self):
         self.getter, self.setter, self.deleter = changers(self.orig)
-        self.diff = change(self.orig, self.getter,
-                           self.setter, self.deleter, **self.attrs)
+        self.diff = change(self.orig, self.getter, self.setter, self.deleter,
+                           **self.attrs)
         return self
 
     def __exit__(self, *args, **kw):
@@ -42,7 +44,9 @@ class state(ContextDecorator):
         def decorated(*args, **kwds):
             with self:
                 return f(*args, **kwds)
+
         return decorated
+
 
 def alter(obj, **changes):
     """
