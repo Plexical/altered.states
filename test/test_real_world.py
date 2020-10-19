@@ -17,12 +17,14 @@ from io import StringIO
 
 from altered import state, Expando, py23compat
 
+
 def test_capture_stdout():
     buf = py23compat.strio()
     print('Foo')
-    with(state(sys, stdout=buf)):
+    with (state(sys, stdout=buf)):
         print('Bar')
     assert buf.getvalue() == 'Bar' + os.linesep
+
 
 # Bit of a pain to set up, but sometime:
 # @state(os.environ, DJANGO_SETTINGS_MODULE='proj.settings')
@@ -30,26 +32,31 @@ def test_capture_stdout():
 #     from proj import models
 #     stuff = models.Model.objects.filter(... # you get the idea
 
+
 def test_patch_sys_modules():
-    with(state(sys.modules, fakey=Expando(foo='bar'))):
+    with (state(sys.modules, fakey=Expando(foo='bar'))):
         import fakey
         assert fakey.foo == 'bar'
-    with(pytest.raises(ImportError)):
+    with (pytest.raises(ImportError)):
         import fakey
+
 
 @state(globals(), injected='foo')
 def test_patch_module():
     assert injected == 'foo'
 
+
 @state(vars(), injected='foo')
 def test_patch_inplace():
     assert injected == 'foo'
+
 
 def test_os_environ():
     with state(os.environ, ALTERED='states'):
         assert os.environ['ALTERED'] == 'states'
 
     assert 'ALTERED' not in os.environ
+
 
 def test_decorator_os_environ():
     @state(os.environ, ALTERED='states')
@@ -59,18 +66,30 @@ def test_decorator_os_environ():
     assert check() == 'states'
     assert 'ALTERED' not in os.environ
 
+
 @pytest.fixture
 def w_getitem():
     class implements_getitem(object):
         def __getitem__(self, key):
             return 'foo'
+
     return implements_getitem()
+
 
 def test_getitem_overridable(w_getitem):
     with state(w_getitem, any='changed'):
         assert w_getitem.any == 'changed'
 
+
 def test_deny_module():
     with pytest.raises(ImportError):
         with state(sys.modules, shutil=None):
             import shutil
+
+
+def test_nested_context():
+    "Should handle nested context managers correctly"
+    env = Expando(foo='bar', bar='baz')
+    with state(env, foo='baz') as _, state(env, bar='foo') as _:
+        assert env.foo == 'baz'
+        assert env.bar == 'foo'

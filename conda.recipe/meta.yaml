@@ -1,0 +1,38 @@
+{% set name = "altered_states" %}
+{% set version = "1.1.0" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_rev:
+  git_url: https://github.com/Plexical/altered.states.git
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+test:
+  requires:
+    - pytest
+    - pytest-cov
+
+  imports:
+    - altered
+
+about:
+  home: "https://github.com/Plexical/altered.states"
+  license: Apache v2
+  licencs_file: LICENCE.rst
+  summary: "Reversible state changes"
+  doc_url: "https://https://altered-states.readthedocs.io/"
+  dev_url:
+
+extra:
+  recipe-maintainers:
+    - jacob414

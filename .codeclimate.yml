@@ -1,0 +1,20 @@
+version: "2"
+engines:
+  sonar-python:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby:
+        javascript:
+          - enabled: false
+        python:
+          python_version: 3
+        php:
+checks:
+  argument-count:
+    enabled: false
+exclude_patterns:
+  - "./htmlcov/"
+  - "contextdecorator.py"

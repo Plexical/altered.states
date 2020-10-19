@@ -11,7 +11,6 @@
 * Dropped support for Python 2.6
 * Experimental support for Kenneth Reitz Pipenv tool
 * Corrected invalid use of `os.modules` in examples
-* Altered States is now coveraged by `coverage.py`
 
 0.8.6
 -----
