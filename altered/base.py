@@ -1,4 +1,4 @@
-import sys
+import os
 
 try:
     from future import standard_library
@@ -8,10 +8,8 @@ except ImportError:
     pass
 
 
-if int(sys.version_info[0]) < 3:
-    Mapping = collections.Mapping
-else:
-    Mapping = collections.abc.Mapping
+def isenv(x):
+    return x is os.environ
 
 
 class Expando(object):
@@ -39,6 +37,18 @@ class Expando(object):
         return '<%s object at 0x%x%s%s>' % (type(self).__name__, id(self),
                                             ': ' if a else '', a)
 
+    def __getitem__(self, key):
+        "Get attribute of `Expando` via index."
+        return self.__dict__[key]
+
+    def __setitem__(self, key, val):
+        "Set attribute of `Expando` via index."
+        self.__dict__[key] = val
+
+    def __delattr__(self, key):
+        "Delete attribute of `Expando` via index."
+        del self.__dict__[key]
+
     def __bool__(self):
         return bool(self.__dict__)
 
@@ -53,7 +63,7 @@ class forget(object):
     """
 
 
-def change(orig, getter, setter, deleter, **attrs):
+def change(orig, **attrs):
     """
     Alter `orig` using the functions `getter`, `setter` and `deleter`
     with the contents of `**attrs`. The get/set/delete use the same
@@ -65,15 +75,15 @@ def change(orig, getter, setter, deleter, **attrs):
     """
     diff = {}
     for key, val in attrs.items():
-        diff[key] = getter(orig, key, forget)
+        diff[key] = anyget(orig, key)
         if val is forget:
-            deleter(orig, key)
+            anydel(orig, key)
         else:
-            setter(orig, key, val)
+            anyset(orig, key, val)
     return diff
 
 
-def restore(orig, diff, getter, setter, deleter):
+def restore(orig, diff):
     """
     Takes a diff produced by `change()` and applies it to `orig` to
     make it revert to the state it had before `change()` was called on
@@ -81,26 +91,56 @@ def restore(orig, diff, getter, setter, deleter):
     """
     for key, old in diff.items():
         if old is forget:
-            deleter(orig, key)
+            anydel(orig, key)
         else:
-            setter(orig, key, old)
+            anyset(orig, key, old)
 
 
-def dictlike(cand):
-    "Determines if `dict` or `object` semantics should be used"
-    return isinstance(cand, Mapping)
+class NoDefault:
+    "Marker for not using a default value"
 
 
-def dictget(dct, key, default):
-    "Provides `getattr` semantics for modifying dictionaries."
-    return dct.get(key, default)
+def anyget(x, key, default=NoDefault):
+    if isenv(x):
+        # os.environ have always been and still is a nasty exception
+        # to all rules...
+        return key in x and x[key] or forget
+    try:
+        return getattr(x, key)
+    except AttributeError:
+        try:
+            return x[key]
+        except KeyError:
+            pass
+
+    if default is NoDefault:
+        return forget
+    else:
+        return default
 
 
-def dictset(dct, key, val):
-    "Provides `setattr` semantics for modifying dictionaries."
-    dct[key] = val
+def anyset(x, key, value):
+    if isenv(x):
+        # os.environ have always been and still is a nasty exception
+        # to all rules... here, a setattr would not raise but wouldn't
+        # update os.environ
+        x[key] = value
+        return
+    try:
+        setattr(x, key, value)
+    except AttributeError:
+        x[key] = value
 
 
-def dictdel(dct, key):
-    "Provides `delattr` semantics for modifiyng dictionaries."
-    del dct[key]
+def anydel(x, key):
+    if isenv(x):
+        # os.environ have always been and still is a nasty exception
+        # to all rules...
+        del os.environ[key]
+        os.unsetenv(key)
+        return
+
+    try:
+        delattr(x, key)
+    except AttributeError:
+        del x[key]

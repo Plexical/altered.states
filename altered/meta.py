@@ -1,5 +1,5 @@
 name = 'altered_states'
-version = '1.0.9'
+version = '1.1.0'
 licence = 'Apache Licence 2.0'
 author = 'Jacob Oscarson'
 author_email = 'jacob@414soft.com'
