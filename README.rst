@@ -65,6 +65,13 @@ actually called.
 
 Altered States runs on Python 2.7 and 3.5+.
 
+Installation
+------------
+
+The PyPI name of the package is ``altered-states``. To install, just do a::
+
+    $ pip install altered-states
+
 Purpose
 -------
 
